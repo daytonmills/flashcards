@@ -57,3 +57,46 @@ function basicQuiz()
         }
     }
 }
+
+// Cloze Quiz
+function clozeQuiz()
+{
+    var clozeCards = [];
+    var current = 0;
+
+    for(let question of questions)
+    {
+        if(question.type == "Cloze"){
+            let clozeCard = new ClozeCard(question.question, question.answer);
+            clozeCards.push(clozeCard);
+        }
+    }
+
+    cardPrompt();
+
+    function cardPrompt()
+    {
+        inquirer.prompt([
+        {
+            type: 'input',
+            message: clozeCards[current].partial,
+            name: "answer"
+        }]).then(function(question) {
+            if(question.answer === clozeCards[current].cloze) {
+                console.log("correct");
+                cardCheck();
+            } else {
+                console.log("wrong");
+                cardCheck();
+            }
+        });
+    }
+
+    function cardCheck()
+    {
+        if (current < clozeCards.length-1) {
+            current++;
+            cardPrompt();
+        }
+    }
+}
