@@ -3,25 +3,57 @@ const ClozeCard = require('./ClozeCard.js');
 const questions = require('./questions.js');
 const inquirer = require('inquirer');
 
-var count = 0;
-var flashcards = [];
-
-//Dynamically create a specific type of card for each question
-for(let question of questions)
-{
-    switch(question.type){
-        case "Basic":
-            let basicCard = new BasicCard(question.question, question.answer);
-            flashcards.push(basicCard);
-            break;
-        case "Cloze":
-            let clozeCard = new ClozeCard(question.question, question.answer);
-            flashcards.push(clozeCard);
-            break;
+inquirer.prompt([{
+    type: 'list',
+    name: 'type',
+    message: 'Which type of cards would you like?',
+    choices: ["Basic Cards", "Cloze Cards"]
+}]).then((answer) => {
+    if (answer.type === 'Basic Cards') {
+        basicQuiz();
+    } else {
+        clozeQuiz();
     }
-}
+});
 
-for(let card of flashcards)
+function basicQuiz()
 {
-    console.log(card);
+    var basicCards = [];
+    var current = 0;
+
+    for(let question of questions)
+    {
+        if(question.type == "Basic"){
+            let basicCard = new BasicCard(question.question, question.answer);
+            basicCards.push(basicCard);
+        }
+    }
+
+    cardPrompt();
+
+    function cardPrompt()
+    {
+        inquirer.prompt([
+        {
+            type: 'input',
+            message: basicCards[current].front,
+            name: "answer"
+        }]).then(function(question) {
+            if(question.answer === basicCards[current].back) {
+                console.log("correct");
+                cardCheck();
+            } else {
+                console.log("wrong");
+                cardCheck();
+            }
+        });
+    }
+
+    function cardCheck()
+    {
+        if (current < basicCards.length-1) {
+            current++;
+            cardPrompt();
+        }
+    }
 }
