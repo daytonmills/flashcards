@@ -2,6 +2,8 @@ const BasicCard = require('./BasicCard.js');
 const ClozeCard = require('./ClozeCard.js');
 const questions = require('./questions.js');
 const inquirer = require('inquirer');
+const chalk = require('chalk');
+const log = console.log;
 
 inquirer.prompt([{
     type: 'list',
@@ -20,6 +22,8 @@ function basicQuiz()
 {
     var basicCards = [];
     var current = 0;
+    var correct = 0;
+    var wrong = 0;
 
     for(let question of questions)
     {
@@ -40,10 +44,12 @@ function basicQuiz()
             name: "answer"
         }]).then(function(question) {
             if(question.answer === basicCards[current].back) {
-                console.log("correct");
+                log(chalk.greenBright("\nCorrect!!!\n"));
+                correct++;
                 cardCheck();
             } else {
-                console.log("wrong");
+                log(chalk.redBright("\nWrong!!!\n"));
+                wrong++;
                 cardCheck();
             }
         });
@@ -55,6 +61,32 @@ function basicQuiz()
             current++;
             cardPrompt();
         }
+        else {
+            log(
+                chalk.white.bold("Game Over!!!\n") +
+                chalk.white("=============================================\n") +
+                chalk.green("Correct: ") + chalk.greenBright(correct) +
+                chalk.red("\nWrong: ") + chalk.redBright(wrong) +
+                chalk.white("\n=============================================\n")
+            );
+
+            inquirer.prompt([
+                {
+                    type: 'confirm',
+                    message: 'Play Again?',
+                    name: 'continue'
+                }
+            ]).then(function(answer) {
+                if (answer.continue) {
+                    current = 0;
+                    correct = 0;
+                    wrong = 0;
+                    cardPrompt();
+                } else {
+                    log(chalk.red("Goodbye!"));
+                }
+            });
+        }
     }
 }
 
@@ -63,6 +95,8 @@ function clozeQuiz()
 {
     var clozeCards = [];
     var current = 0;
+    var correct = 0;
+    var wrong = 0;
 
     for(let question of questions)
     {
@@ -83,10 +117,12 @@ function clozeQuiz()
             name: "answer"
         }]).then(function(question) {
             if(question.answer === clozeCards[current].cloze) {
-                console.log("correct");
+                log(chalk.greenBright("\nCorrect!!!\n"));
+                correct++;
                 cardCheck();
             } else {
-                console.log("wrong");
+                log(chalk.redBright("\nWrong!!!\n"));
+                wrong++;
                 cardCheck();
             }
         });
@@ -97,6 +133,32 @@ function clozeQuiz()
         if (current < clozeCards.length-1) {
             current++;
             cardPrompt();
+        }
+        else {
+            log(
+                chalk.white.bold("Game Over!!!\n") +
+                chalk.white("=============================================\n") +
+                chalk.green("Correct: ") + chalk.greenBright(correct) +
+                chalk.red("\nWrong: ") + chalk.redBright(wrong) +
+                chalk.white("\n=============================================\n")
+            );
+
+            inquirer.prompt([
+                {
+                    type: 'confirm',
+                    message: 'Play Again?',
+                    name: 'continue'
+                }
+            ]).then(function(answer) {
+                if (answer.continue) {
+                    current = 0;
+                    correct = 0;
+                    wrong = 0;
+                    cardPrompt();
+                } else {
+                    log(chalk.red("Goodbye!"));
+                }
+            });
         }
     }
 }

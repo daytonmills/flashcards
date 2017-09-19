@@ -1,0 +1,26 @@
+{
+  "name": "flashcards",
+  "version": "1.0.0",
+  "description": "Basic and Close Flashcards for node terminal",
+  "main": "flashcards.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daytonmills/flashcards.git"
+  },
+  "keywords": [
+    "flashcards"
+  ],
+  "author": "daytonm.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/daytonmills/flashcards/issues"
+  },
+  "homepage": "https://github.com/daytonmills/flashcards#readme",
+  "dependencies": {
+    "chalk": "^2.1.0",
+    "inquirer": "^3.3.0"
+  }
+}
