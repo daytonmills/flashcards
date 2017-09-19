@@ -11,9 +11,14 @@ var questions = [
     },
     {
         "question": "George Washington was the first president of the United States.",
-        "answer": "George Washington",
+        "answer": "Washington",
         "type": "Cloze"
-    }
+    },
+    {
+        "question": "John Adams was the second president of the United States?",
+        "answer": "John",
+        "type": "Cloze"
+    },
 ];
 
 module.exports = questions;

@@ -73,7 +73,7 @@ function basicQuiz()
         }
         else {
             log(
-                chalk.yellow.bold("Game Over!!!\n") +
+                chalk.white.bold("Game Over!!!\n") +
                 chalk.black.bold("=============================================\n") +
                 chalk.green("Correct: ") + chalk.greenBright(correct) +
                 chalk.red("\nWrong: ") + chalk.redBright(wrong) +
@@ -156,7 +156,7 @@ function clozeQuiz()
         }
         else {
             log(
-                chalk.yellow.bold("Game Over!!!\n") +
+                chalk.white.bold("Game Over!!!\n") +
                 chalk.black.bold("=============================================\n") +
                 chalk.green("Correct: ") + chalk.greenBright(correct) +
                 chalk.red("\nWrong: ") + chalk.redBright(wrong) +
