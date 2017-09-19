@@ -44,11 +44,21 @@ function basicQuiz()
             name: "answer"
         }]).then(function(question) {
             if(question.answer === basicCards[current].back) {
-                log(chalk.greenBright("\nCorrect!!!\n"));
+                log(
+                    chalk.black.bold("=============================================\n") +
+                    chalk.greenBright("Correct!!!\n") +
+                    chalk.gray(basicCards[current].front + " : " + basicCards[current].back + "\n") +
+                    chalk.black.bold("=============================================\n")
+                );
                 correct++;
                 cardCheck();
             } else {
-                log(chalk.redBright("\nWrong!!!\n"));
+                log(
+                    chalk.black.bold("=============================================\n") +
+                    chalk.redBright("Wrong!!!\n") +
+                    chalk.gray(basicCards[current].front + " : " + basicCards[current].back + "\n") +
+                    chalk.black.bold("=============================================\n")
+                );
                 wrong++;
                 cardCheck();
             }
@@ -63,11 +73,11 @@ function basicQuiz()
         }
         else {
             log(
-                chalk.white.bold("Game Over!!!\n") +
-                chalk.white("=============================================\n") +
+                chalk.yellow.bold("Game Over!!!\n") +
+                chalk.black.bold("=============================================\n") +
                 chalk.green("Correct: ") + chalk.greenBright(correct) +
                 chalk.red("\nWrong: ") + chalk.redBright(wrong) +
-                chalk.white("\n=============================================\n")
+                chalk.black.bold("\n=============================================\n")
             );
 
             inquirer.prompt([
@@ -117,11 +127,21 @@ function clozeQuiz()
             name: "answer"
         }]).then(function(question) {
             if(question.answer === clozeCards[current].cloze) {
-                log(chalk.greenBright("\nCorrect!!!\n"));
+                log(
+                    chalk.black.bold("=============================================\n") +
+                    chalk.greenBright("Correct!!!\n") +
+                    chalk.gray(clozeCards[current].fullText + "\n") +
+                    chalk.black.bold("=============================================\n")
+                );
                 correct++;
                 cardCheck();
             } else {
-                log(chalk.redBright("\nWrong!!!\n"));
+                log(
+                    chalk.black.bold("=============================================\n") +
+                    chalk.redBright("Wrong!!!\n") +
+                    chalk.gray(clozeCards[current].fullText + "\n") +
+                    chalk.black.bold("=============================================\n")
+                );
                 wrong++;
                 cardCheck();
             }
@@ -136,11 +156,11 @@ function clozeQuiz()
         }
         else {
             log(
-                chalk.white.bold("Game Over!!!\n") +
-                chalk.white("=============================================\n") +
+                chalk.yellow.bold("Game Over!!!\n") +
+                chalk.black.bold("=============================================\n") +
                 chalk.green("Correct: ") + chalk.greenBright(correct) +
                 chalk.red("\nWrong: ") + chalk.redBright(wrong) +
-                chalk.white("\n=============================================\n")
+                chalk.black.bold("\n=============================================\n")
             );
 
             inquirer.prompt([
